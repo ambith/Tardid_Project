@@ -23,7 +23,7 @@ pipeline {
             }
         stage("Jenkins To Tomcat") {
                steps {
-           bat "copy target\\JenkinsWar.war \"${tomcatWeb}\\JenkinsWar.war\"
+           bat "copy target\\**/*.war \"${tomcatWeb}\\**/*.war\"
                 }
             } 
            stage("Start Tomcat Server") {
