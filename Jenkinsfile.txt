@@ -23,7 +23,7 @@ pipeline {
             }
         stage("Jenkins To Tomcat") {
                steps {
-           bat "copy target\\**/*.war \"${tomcatWeb}\\**/*.war\"
+           bat "copy target\\**/*.war \"${http://192.168.179.131:8090/}\\**/*.war\"
                 }
             } 
            stage("Start Tomcat Server") {
