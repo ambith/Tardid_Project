@@ -23,7 +23,7 @@ pipeline {
             }
         stage("Tomcat") {
                steps {
-                deploy adapters: [tomcat9(credentialsId: '812e4395-2b11-4f54-8fb0-39c13416b3d8', path: '', url: 'http://192.168.179.131:8090/manager/html/undeploy;jsessionid=22C83D060C2A03EB700B278269226FF3?path=/Ambith&org.apache.catalina.filters.CSRF_NONCE=5E15A1A746F60C1F9198352D01F6412A')], contextPath: 'Ambith', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: '812e4395-2b11-4f54-8fb0-39c13416b3d8', path: '', url: 'http://192.168.179.131:8090/')], contextPath: 'Ambith', war: '/var/lib/jenkins/workspace/Tardid/target/.war'
                 }
             } 
         }
