@@ -21,6 +21,13 @@ pipeline {
                    sh "mvn clean package"
                 }
             }
+            stage{"Tomcat") {
+               steps {
+                 deploy adapters: [tomcat9(credentialsId: '812e4395-2b11-4f54-8fb0-39c13416b3d8', 
+                 path: '', url: 'http://192.168.179.131:8090/')], 
+                 contextPath: 'Ambith', war: '**/*war'
+                    }
+                 }
         stage("Jenkins To Tomcat") {
                steps {
            bat "copy target\\**/*.war \"${http://192.168.179.131:8090/}\\*.war\"
@@ -33,10 +40,5 @@ pipeline {
                 sleep(time:100, unit:"SECONDS")
                 }
               }
-             stage{"Tomcat") {
-               steps {
-                 deploy adapters: [tomcat9(credentialsId: '812e4395-2b11-4f54-8fb0-39c13416b3d8', 
-                 path: '', url: 'http://192.168.179.131:8090/')], 
-                 contextPath: 'Ambith', war: '**/*war'
         }
     }
