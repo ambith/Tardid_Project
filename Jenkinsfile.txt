@@ -1,7 +1,5 @@
 pipeline {
     agent any
-        environment {
-                PATH = "/opt/maven/apache-maven-3.8.1/bin:$PATH"
                  }
     stages {
         stage('Tardid') {
@@ -14,11 +12,6 @@ pipeline {
                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs:
  [[credentialsId: '4c5852f9-a05e-424b-af40-f866dad0cdba',
  url: 'https://github.com/ambith/Tardid_Project.git']]])
-            }
-        }
-        stage ("compile package the code") {
-                steps {
-                   sh "mvn clean package"
                 }
             }
         
