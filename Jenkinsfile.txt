@@ -1,27 +1,23 @@
-#!bin/sh
 pipeline {
-    agent any
-        environment {
-                PATH = "/usr/local/bin/mvn-entrypoint.sh:$PATH"
-                 }
-    stages {
-        stage('Tardid') {
-            steps {
-                echo 'Hello Tardid'
-            }
-        }
-        stage('GIT HUB') {
-            steps {
-               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs:
- [[credentialsId: '4c5852f9-a05e-424b-af40-f866dad0cdba',
- url: 'https://github.com/ambith/Tardid_Project.git']]])
-            }
-        }
-        stage ("compile package the code") {
-                steps {
-                   sh "mvn clean package"
-                }
-            }
-        
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 3000:3000'
         }
     }
+    environment {
+        CI = 'true' 
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh './jenkins/scripts/test.sh' 
+            }
+        }
+    }
+}
