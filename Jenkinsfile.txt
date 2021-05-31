@@ -1,7 +1,7 @@
 pipeline {
     agent any
         environment {
-                PATH = "/var/lib/docker/volumes/maven_home/_data:$PATH"
+                PATH = "/usr/local/bin/mvn-entrypoint.sh:$PATH"
                  }
     stages {
         stage('Tardid') {
