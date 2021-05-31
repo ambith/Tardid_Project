@@ -1,23 +1,26 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:lts-buster-slim'
-            args '-p 3000:3000'
-        }
-    }
-    environment {
-        CI = 'true' 
-    }
+    agent any
+        environment {
+                PATH = "/var/lib/docker/volumes/maven_home/_data:$PATH"
+                 }
     stages {
-        stage('Build') {
+        stage('Tardid') {
             steps {
-                sh 'npm install'
+                echo 'Hello Tardid'
             }
         }
-        stage('Test') { 
+        stage('GIT HUB') {
             steps {
-                sh './jenkins/scripts/test.sh' 
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs:
+ [[credentialsId: '4c5852f9-a05e-424b-af40-f866dad0cdba',
+ url: 'https://github.com/ambith/Tardid_Project.git']]])
             }
+        }
+        stage ("compile package the code") {
+                steps {
+                   sh "mvn clean package"
+                }
+            }
+        
         }
     }
-}
