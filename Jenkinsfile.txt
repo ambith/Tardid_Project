@@ -1,46 +1,29 @@
-def getDockerTag(){
-    def tag = sh sript: 'git rev-parse HEAD' , returnStdout:true
-    return tag
-}
-pipeline{
-      agent any
-       environment {
-             Docker_tag = getDockerTag()
-       }
-       stages{
-               stage('Quality Gate Status check'){
-                  agent{
-                  docker{
+pipeline {
+    agent any
+        environment {
+                docker{
                   image 'maven'
                   args '-v $HOME/.m2:root/.m2'
                   }
-        }
-                 stage{ 
-                     script{
-                 withSonarQubeEnv('sonarserver') {
-                 sh "mvn sonar:sonar"
-
-                  timeout(time: 1, unit: 'HOURS') {
-                  def qg = waitForQualityGate()
-                      if (qg.status != 'OK') {
-                      error "Pipeline aborted due to quality gate failure: ${qg.status}
-                      }
-                             }
-                   sh "mvn clean install"
-                   }
-               }
+                 }
+    stages {
+        stage('Tardid') {
+            steps {
+                echo 'Hello Tardid'
             }
-             stage('build') {
-                steps{
-                  script{
-                       docker build . -t ambith/Tardid_Prject:Docker_tag
-                       withCredentials([string(credentialId: 'docker_password',variable: 'docker_password')]) {
-                         docker login -u ambit -p $docker_password
-                             docker"push ambiht/Tardid_Project:Docker_tag
-                        }
-                    }
-               }
-       }
-   }
-}
-
+        }
+        stage('GIT HUB') {
+            steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs:
+ [[credentialsId: '4c5852f9-a05e-424b-af40-f866dad0cdba',
+ url: 'https://github.com/ambith/Tardid_Project.git']]])
+            }
+        }
+        stage ("compile package the code") {
+                steps {
+                   sh "mvn clean package"
+                }
+            }
+        
+        }
+    }
