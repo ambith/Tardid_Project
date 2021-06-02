@@ -15,11 +15,7 @@ pipeline {
  url: 'https://github.com/ambith/Tardid_Project.git']]])
             }
         }
-        stage ("compile package the code") {
-                steps {
-                   sh "mvn clean package"
-                }
-            }
+        
         
         }
     }
