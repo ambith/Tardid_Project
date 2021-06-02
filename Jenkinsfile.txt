@@ -1,9 +1,6 @@
 pipeline {
     agent any
-        environment {
-                PATH = "/var/lib/docker/volumes/maven_home/_data:$PATH"
-                 }
-    stages {
+        stages {
         stage('Tardid') {
             steps {
                 echo 'Hello Tardid'
