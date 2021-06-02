@@ -1,10 +1,9 @@
 pipeline {
     agent any
-        environment {
                 docker{
-                  image 'maven'
+                  image 'maven_home'
                   args '-v $HOME/.m2:root/.m2'
-                  }
+                  
                  }
     stages {
         stage('Tardid') {
