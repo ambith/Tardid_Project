@@ -1,9 +1,7 @@
 pipeline {
     agent any
-                docker{
-                  image 'maven_home'
-                  args '-v $HOME/.m2:root/.m2'
-                  
+        environment {
+                PATH = "/var/lib/docker/volumes/maven_home/_data:$PATH"
                  }
     stages {
         stage('Tardid') {
