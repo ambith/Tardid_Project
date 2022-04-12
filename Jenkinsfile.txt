@@ -20,6 +20,5 @@ pipeline {
                 cp /var/lib/jenkins/workspace/tardid/target/tardid.war /opt/tomcat/tomcat/webapps/
                 }
             }
-        
         }
     }
