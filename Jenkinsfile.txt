@@ -18,7 +18,7 @@ pipeline {
                steps {
                 sh '''
                 mvn clean package
-                cp /var/lib/jenkins/workspace/tardid/target/tardid.war /opt/tomcat/tomcat/webapps/
+                sudo cp /var/lib/jenkins/workspace/tardid/target/tardid.war /opt/tomcat/tomcat/webapps/
                 tomcatup
                 http://192.168.1.19:8000/
                 '''
