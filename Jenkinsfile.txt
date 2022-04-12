@@ -16,12 +16,7 @@ pipeline {
         }
         stage ("compile package the code") {
                steps {
-                sh '''
-                mvn clean package
-                ExecStart=/opt/tomcat/tomcat/bin/startup.sh
-                cp /var/lib/jenkins/workspace/tardid/target/tardid.war /opt/tomcat/tomcat/webapps/
-                http://192.168.1.19:8000/
-                '''
+                sh "mvn clean package"
                 }
             }
         }
