@@ -8,7 +8,7 @@ pipeline {
         }
         stage('GIT HUB') {
             steps {
-             checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '70e4163c-2184-4386-ac8c-ab9c46b1db07', url: 'https://github.com/ambith/Tardid_Project.git']]])
+             checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '50e23868-8dfe-4003-92ed-8dc03a499f0f', url: 'https://github.com/ambith/Tardid_Project.git']]])
             }
         }
         stage ("compile package the code") {
