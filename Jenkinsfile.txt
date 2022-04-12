@@ -13,10 +13,9 @@ pipeline {
         }
         stage ("compile package the code") {
                steps {
-               withMaven(maven: 'mvn') {
-                   sh "mvn clean package"
+                sh "mvn clean package"
                 }
             }
-        }
+        
         }
     }
