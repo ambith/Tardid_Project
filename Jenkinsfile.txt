@@ -17,7 +17,6 @@ pipeline {
         stage ("compile package the code") {
                steps {
                 sh "mvn clean package"
-                cp /var/lib/jenkins/workspace/tardid/target/tardid.war /opt/tomcat/tomcat/webapps/
                 }
             }
         }
